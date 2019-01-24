@@ -1,6 +1,8 @@
 package com.reiterweg.findthecelebrity.factory;
 
 import com.reiterweg.findthecelebrity.domain.Attendance;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,6 +11,8 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 public class AttendanceFromFile extends Attendance {
+
+    private static final Logger logger = LoggerFactory.getLogger(AttendanceFromFile.class);
 
     private int[][] people;
     private File file;
@@ -30,13 +34,10 @@ public class AttendanceFromFile extends Attendance {
 
     @Override
     protected void loadPeople() {
-        BufferedReader reader = null;
         int numberOfPeople = 0;
         String line;
 
-        try {
-            reader = new BufferedReader(new FileReader(file));
-
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             if ((line = reader.readLine()) != null) {
                 numberOfPeople = Integer.valueOf(line);
             }
@@ -50,15 +51,7 @@ public class AttendanceFromFile extends Attendance {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            logger.error("There was an error loading info file {}", file.getAbsolutePath(), e);
         }
     }
 

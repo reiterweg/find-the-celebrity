@@ -1,16 +1,20 @@
 package com.reiterweg.findthecelebrity;
 
 import com.reiterweg.findthecelebrity.controller.AttendanceController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FindTheCelebrity {
+
+    private static final Logger logger = LoggerFactory.getLogger(FindTheCelebrity.class);
 
     public static void main(String[] args) {
         int celebrity = new AttendanceController().execute();
 
         if (celebrity >= 0) {
-            System.out.printf("Celebrity at the party is person %d%n", celebrity);
+            logger.info("Celebrity at the party is person {}", celebrity);
         } else {
-            System.out.println("There is no celebrity at the party");
+            logger.info("There is no celebrity at the party");
         }
     }
 

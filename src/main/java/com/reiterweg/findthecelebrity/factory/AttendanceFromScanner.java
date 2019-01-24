@@ -1,12 +1,16 @@
 package com.reiterweg.findthecelebrity.factory;
 
 import com.reiterweg.findthecelebrity.domain.Attendance;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class AttendanceFromScanner extends Attendance {
+
+    private static final Logger logger = LoggerFactory.getLogger(AttendanceFromScanner.class);
 
     private int[][] people;
 
@@ -27,17 +31,16 @@ public class AttendanceFromScanner extends Attendance {
         String line;
 
         do {
-            System.out.println("How many attendants are there?");
+            logger.info("How many attendants are there?");
             try {
                 numberOfPeople = scanner.nextInt();
                 scanner.nextLine();
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Try again, please.");
+                logger.error("Invalid input. Try again, please.");
             }
         } while (numberOfPeople == 0);
 
-        // people = new int[numberOfPeople][numberOfPeople];
-        people = new int[numberOfPeople][2];
+        people = new int[numberOfPeople][numberOfPeople];
 
         for (int i = 0; i < numberOfPeople; i++) {
             line = scanner.nextLine();

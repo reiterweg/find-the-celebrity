@@ -56,7 +56,6 @@ public class AttendanceTests {
     @Test
     public void withOneCelebrityKnowsHimself() {
         int[][] people = new int[4][];
-
         people[0] = new int[]{0, 0, 0, 1};
         people[1] = new int[]{0, 0, 0, 1};
         people[2] = new int[]{0, 0, 0, 1};
