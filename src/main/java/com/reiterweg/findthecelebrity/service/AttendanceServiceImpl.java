@@ -2,13 +2,14 @@ package com.reiterweg.findthecelebrity.service;
 
 import com.reiterweg.findthecelebrity.domain.Attendance;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class AttendanceServiceImpl implements AttendanceService {
 
     @Override
     public int findTheCelebrity(Attendance attendance) {
-        Stack<Integer> stack = new Stack<>();
+        Deque<Integer> stack = new ArrayDeque<>();
         int n = attendance.getPeople().length;
 
         if (n < 1) {
